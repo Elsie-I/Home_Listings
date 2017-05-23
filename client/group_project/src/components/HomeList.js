@@ -3,11 +3,11 @@ import Home from './Home'
 class HomeList extends Component {
   render() {
     return (
-      <ul className="homeslist">{this.props.homes.map((homes) => {
+      <ul className="homeslist">{this.props.homes.map((elem) => {
         return (
           <Home
-            key={homes.id}
-            homes={homes}
+            key={elem.id}
+            homes={elem}
           />
         )
       })}

@@ -27,7 +27,7 @@ class App extends Component {
       console.log(responseJson);
       this.setState((prevState) => {
         return {
-          homes: responseJson.homesData,
+          homes: responseJson.data.homes,
         }
       });
     });
