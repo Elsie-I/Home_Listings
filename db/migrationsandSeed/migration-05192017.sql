@@ -1,7 +1,7 @@
 -- \c home_listings_dev
 
 DROP TABLE users;
-DROP TABLE Homes;
+DROP TABLE Homes; 
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGSERIAL PRIMARY KEY,

@@ -5,14 +5,14 @@ const homesController = {};
 homesController.index = (req, res) => {
   Home.findAll()
     .then(homes => {
-      res.json({ 
+      res.json({
         message: 'ok',
         data: { homes },
       });
-    }) 
+    })
     .catch(err => {
       console.log(err);
-      res.status(400).json({message: '400', err});
+      res.status(400).json({ message: '400', err });
     });
 };
 
@@ -25,26 +25,39 @@ homesController.show = (req, res) => {
       });
     })
     .catch(err => {
-      res.status(400).json({message: '400', err});
+      res.status(400).json({ message: '400', err });
     });
 };
 
+
 homesController.create = (req, res) => {
   Home.create({
-      home: req.body.home,
-    })
+    address: req.body.address,
+    zipcode: req.body.zipcode,
+    city: req.body.city,
+    bedrooms: req.body.bedrooms,
+    price: req.body.price,
+    about: req.body.about,
+    img_url: req.body.img_url,
+  })
     .then(home => {
-      res.json({message: 'ok', data: { home }});
+      res.json({ message: 'ok', data: { home } });
     })
     .catch(err => {
       console.log(err);
-      res.status(400).json({message: '400', err});
+      res.status(400).json({ message: '400', err });
     });
 };
 
 homesController.update = (req, res) => {
   Home.update({
-    home: req.body.home,
+    address: req.body.address,
+    zipcode: req.body.zipcode,
+    city: req.body.city,
+    bedrooms: req.body.bedrooms,
+    price: req.body.price,
+    about: req.body.about,
+    img_url: req.body.img_url,
   }, req.params.id)
     .then(home => {
       res.json({
@@ -61,7 +74,7 @@ homesController.update = (req, res) => {
 homesController.destroy = (req, res) => {
   Home.destroy(req.params.id)
     .then(() => {
-      res.json({message: 'home deleted'});
+      res.json({ message: 'home deleted' });
     })
     .catch(err => {
       console.log(err);

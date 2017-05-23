@@ -6,26 +6,25 @@ Home.findAll = () => {
   return db.query(
     `SELECT * FROM homes ORDER BY id DESC`
   );
-}; 
+};
 
 Home.findById = (id) => {
   return db.oneOrNone(
     `
     SELECT * FROM homes
-    WHERE id = $1`, 
+    WHERE id = $1`,
     [id]
   );
 };
 
 
-
 Home.create = (home) => {
   return db.one(
     `
-    INSERT INTO homes (address, zipcode, city, bedrooms, price)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO homes (address, zipcode, city, bedrooms, price, about, img_url)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`,
-    [home.address, home.zipcode, home.city, home.bedrooms, home.price]
+    [home.address, home.zipcode, home.city, home.bedrooms, home.price, home.about, home.img_url]
   );
 };
 
@@ -38,9 +37,11 @@ Home.update = (home, id) => {
       city = $3
       bedrooms = $4
       price = $5
+      about = $6
+      img_url = $7
       WHERE id = $6
       RETURNING *
-    `, [home.address, home.zipcode, home.city, home.bedrooms, home.price, id]
+    `, [home.address, home.zipcode, home.city, home.bedrooms, home.price, home.about, home.img_url, id]
   );
 };
 
