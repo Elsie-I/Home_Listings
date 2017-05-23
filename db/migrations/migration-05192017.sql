@@ -1,4 +1,4 @@
-\c home_listings_dev
+-- \c home_listings_dev
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGSERIAL PRIMARY KEY,

@@ -1,4 +1,4 @@
-\c home_listings_dev
+-- \c home_listings_dev
 
 INSERT INTO homes (address, zipcode, city, bedrooms, price) VALUES 
   ('2345 coney island avenue', 11235, 'brooklyn', 2, 1500),
