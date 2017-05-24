@@ -27,6 +27,7 @@ class OwnerList extends Component {
   this.handlePriceChange=this.handlePriceChange.bind(this);
   this.handleAboutChange=this.handleAboutChange.bind(this);
   this.handleImgChange=this.handleImgChange.bind(this);
+  this.handleDeleteHome = this.handleDeleteHome.bind(this);
   }
   componentDidMount() {
     this.fetchAllHomes()
@@ -39,7 +40,7 @@ class OwnerList extends Component {
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson.data.homes[4])
+      // console.log(responseJson.data.homes[4])
       //debugger;
       this.setState((prevState) => {
         return {
@@ -75,11 +76,12 @@ class OwnerList extends Component {
     handleHomesSubmit(event) {
         event.preventDefault();
         console.log('clicked')
+        console.log(event.target.address)
         
         fetch('https://homelistings.herokuapp.com/api/homes',{
-          method:'post',
+          method:'POST',
           headers: {'Content-Type': 'application/json'},
-          body:JSON.stringify({
+          body: JSON.stringify({
             address: event.target.address.value,
             zipcode: event.target.zipcode.value,
             city: event.target.city.value,
@@ -89,32 +91,41 @@ class OwnerList extends Component {
             img_url: event.target.img_url.value,
           }),
         })
-        .then((response)=>{
-          return response.json()
-        })
-        .then((responseJson)=>{
-          console.log(responseJson)
-          const newHome={
-            address: responseJson.data.homes.address,
-            zipcode: responseJson.data.homes.zipcode,
-            city: responseJson.data.homes.city,
-            bedrooms: responseJson.data.homes.bedrooms,
-            price: responseJson.data.homes.price,
-            about: responseJson.data.homes.about,
-            img_url: responseJson.data.homes.img_url,
-          }
-          this.setState((prevState)=>{
-            return {
-              homes: prevState.homes.concat(newHome),
+        // .then((response)=>{
+        //   return response.json()
+        // })
+        // .then((responseJson)=>{
+        //   console.log(responseJson)
+        //   const newHome={
+        //     address: responseJson.data.homes.address,
+        //     zipcode: responseJson.data.homes.zipcode,
+        //     city: responseJson.data.homes.city,
+        //     bedrooms: responseJson.data.homes.bedrooms,
+        //     price: responseJson.data.homes.price,
+        //     about: responseJson.data.homes.about,
+        //     img_url: responseJson.data.homes.img_url,
+        //   }
+        //   this.setState((prevState)=>{
+        //     return {
+        //       homes: prevState.homes.concat(newHome),
               
-            }
-          })
-        })
+        //     }
+        //   })
+        // })
     }
     
 
 
-
+ handleDeleteHome(homeId) {
+    fetch(`https://homelistings.herokuapp.com/api/homes${homeId}`, {
+      method: 'DELETE',
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        this.fetchAllQuotes();
+      }
+    })
+  }
     
 
   render() {
@@ -143,6 +154,7 @@ class OwnerList extends Component {
           handlePriceChange={this.handlePriceChange}
           handleAboutChange={this.handleAboutChange}
           handleImgChange={this.handleImgChange}
+          handleDeleteHome={this.handleDeleteHome}
          />
         <OwnerSingle singlehome={this.state.homes} />
         
