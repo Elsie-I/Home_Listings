@@ -3,6 +3,8 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeList from './components/HomeList';
 import Home from './components/Home';
+import Searchedcomp from './components/Searchedcomp';
+import OwnerList from './components/OwnerList';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -24,7 +26,10 @@ class App extends Component {
               </ul>
             </nav>
             <main>
+
+            <Route exact path="/ownerpage" component={OwnerList} />
             <Route exact path="/propertieslist" component={HomeList} />
+            <Route exact path="/propertieslist/:searched" component={Searchedcomp} />
             </main>
             {/*<HomeList
                 homes={this.state.homes}/>*/}

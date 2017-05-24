@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import Searchedcomp from './Searchedcomp';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 class HomeList extends Component {
     constructor(props){
     super(props);
@@ -36,7 +41,7 @@ class HomeList extends Component {
   };
 
   handleSearchSubmit(event) {
-    event.preventDefault();
+    //event.preventDefault();
       fetch('https://homelistings.herokuapp.com/api/homes')
     .then((response) => {
       return response.json()
@@ -84,6 +89,7 @@ class HomeList extends Component {
                  onChange={this.handleSearchChange}
                  />
             <input type="submit" value="Search Now"/>
+            <li className="mainlinks"><Link to="/propertieslist?city=">Search stuff</Link></li>
         </form>
         {/*<Searchedcomp newSearched={this.state.newSearched}/>*/}
       </div>
