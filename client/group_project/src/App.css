@@ -22,3 +22,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.homeslist {
+  list-style-type: none;
+}
+.mainlinks{
+list-style-type: none;
+}
+.homelist {
+  margin:20px;
+}
+.singleHome {
+  margin:30px;
+}
