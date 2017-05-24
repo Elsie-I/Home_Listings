@@ -9,11 +9,26 @@ Home.findAll = () => {
 };
 
 Home.findById = (id) => {
+  
   return db.oneOrNone(
     `
     SELECT * FROM homes
     WHERE id = $1`,
     [id]
+  );
+};
+
+
+
+Home.findSpecific = (zipcode, price) => {
+  
+  return db.oneOrNone(
+    `
+    SELECT * FROM homes
+    WHERE zipcode = $1
+    AND price < $2
+    `,
+    [zipcode, price]
   );
 };
 

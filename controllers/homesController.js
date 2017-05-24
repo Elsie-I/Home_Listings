@@ -28,6 +28,20 @@ homesController.show = (req, res) => {
       res.status(400).json({ message: '400', err });
     });
 };
+homesController.showSpecific = (req, res) => {
+      console.log(req);
+
+  Home.findSpecific(req.params.zipcode, req.params.zipcode)
+    .then(home => {
+      res.json({
+        message: 'ok',
+        data: { home },
+      });
+    })
+    .catch(err => {
+      res.status(400).json({ message: '400', err });
+    });
+};
 
 
 homesController.create = (req, res) => {
@@ -46,7 +60,7 @@ homesController.create = (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(400).json({ message: '400', err });
-    });
+    }); 
 };
 
 homesController.update = (req, res) => {
