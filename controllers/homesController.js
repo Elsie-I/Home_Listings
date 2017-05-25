@@ -56,7 +56,7 @@ homesController.create = (req, res) => {
   })
     .then(home => {
       res.json({ message: 'ok', data: { home } });
-    })
+    }) 
     .catch(err => {
       console.log(err);
       res.status(400).json({ message: '400', err });

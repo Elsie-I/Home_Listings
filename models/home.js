@@ -17,12 +17,12 @@ Home.findById = (id) => {
     [id]
   );
 };
-
+ 
 
 
 Home.findSpecific = (zipcode, price) => {
   
-  return db.oneOrNone(
+  return db.query(
     `
     SELECT * FROM homes
     WHERE zipcode = $1
@@ -47,14 +47,14 @@ Home.update = (home, id) => {
   return db.one(
     `
       UPDATE homes SET
-      address = $1
-      zipcode = $2
-      city = $3
-      bedrooms = $4
-      price = $5
-      about = $6
+      address = $1,
+      zipcode = $2,
+      city = $3,
+      bedrooms = $4,
+      price = $5,
+      about = $6,
       img_url = $7
-      WHERE id = $6
+      WHERE id = $8
       RETURNING *
     `, [home.address, home.zipcode, home.city, home.bedrooms, home.price, home.about, home.img_url, id]
   );

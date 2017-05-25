@@ -18,7 +18,7 @@ class DetailsSinglePage extends Component {
       return response.json()
     })
     .then((responseJson) => {
-      console.log(responseJson)
+      // console.log(responseJson)
       //debugger
       // this.setState((prevState) => {
       //   return {
