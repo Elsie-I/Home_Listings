@@ -29,7 +29,7 @@ class App extends Component {
 
             <Route exact path="/ownerpage" component={OwnerList} />
             <Route exact path="/propertieslist" component={HomeList} />
-            <Route exact path="/propertieslist/:searched" component={Searchedcomp} />
+            <Route exact path="/propertieslist/:id" component={Searchedcomp} />
             </main>
             {/*<HomeList
                 homes={this.state.homes}/>*/}

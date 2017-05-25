@@ -15,7 +15,9 @@ class HomeList extends Component {
   }
   this.handleSearchChange=this.handleSearchChange.bind(this);
   this.handleSearchSubmit=this.handleSearchSubmit.bind(this);
-  }
+  this.handleDeleteHome = this.handleDeleteHome.bind(this);
+  this.handleHomesEdit=this.handleHomesEdit.bind(this);
+}
   componentDidMount() {
     this.fetchAllHomes()
   }
@@ -61,11 +63,41 @@ class HomeList extends Component {
           newSearched: responseJson.data.homes.elem,
         }
       });
-    });
-    
+    }); 
   }
 
+   handleHomesEdit(event) {
+   event.preventDefault();
+   fetch(`https://homelistings.herokuapp.com/api/homes/${event.target.id.value}`,{
+     method: 'PUT',
+     headers: {'Content-type': 'application/json'},
+     body: JSON.stringify({
+            address: event.target.address.value,
+            zipcode: event.target.zipcode.value,
+            city: event.target.city.value,
+            bedrooms: event.target.bedrooms.value,
+            price: event.target.price.value,
+            about: event.target.about.value,
+            img_url: event.target.img_url.value,
+     }),
+   })
+   .then((response)=>{
+     if(response.status===200){
+     this.fetchAllHomes();
+     }
+   })
+ }
 
+  handleDeleteHome(id) {
+    fetch(`https://homelistings.herokuapp.com/api/homes/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          this.fetchAllHomes();
+        }
+      })
+}
   render() {
     return (
       <div>
@@ -74,6 +106,8 @@ class HomeList extends Component {
             <Home
               key={elem.id}
               homes={elem}
+              handleDeleteHome={this.handleDeleteHome}
+              handleHomesEdit={this.handleHomesEdit}
             />
           )
         })}

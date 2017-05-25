@@ -34,3 +34,7 @@ list-style-type: none;
 .singleHome {
   margin:30px;
 }
+.singleHome img {
+  height: 300px;
+  width: 300px;
+}

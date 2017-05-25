@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
 class DetailsSinglePage extends Component {
-  constructor(props){
-    super(props);
-  this.state={
-    homes:[],
-    }
-  }
+
   componentDidMount() {
     this.fetchSingleHome()
   }
@@ -19,18 +14,18 @@ class DetailsSinglePage extends Component {
     })
     .then((responseJson) => {
       console.log(responseJson)
-      //debugger
-      // this.setState((prevState) => {
-      //   return {
-      //     homes: responseJson.data.homes,
-      //   }
-      // });
+      
+      this.setState((prevState) => {
+        return {
+          homes: responseJson.ids,
+        }
+      });
     });
   }
   render() {
     return (
       <div>
-        <p>this is page for id {this.props.ids}</p>
+              <p>Property Id {this.props.ids}</p>
       </div>
     )
   }
