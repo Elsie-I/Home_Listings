@@ -11,10 +11,8 @@ class HomeList extends Component {
     super(props);
   this.state={
     homes:[],
-    searchValue: "",
   }
-  this.handleSearchChange=this.handleSearchChange.bind(this);
-  this.handleSearchSubmit=this.handleSearchSubmit.bind(this);
+
   this.handleDeleteHome = this.handleDeleteHome.bind(this);
   this.handleHomesEdit=this.handleHomesEdit.bind(this);
 }
@@ -22,49 +20,34 @@ class HomeList extends Component {
     this.fetchAllHomes()
   }
 
-  fetchAllHomes() {
+fetchAllHomes() {
     fetch('https://homelistings.herokuapp.com/api/homes')
-    .then((response) => {
-      return response.json()
-    })
-    .then((responseJson) => {
-      console.log(responseJson)
-      this.setState((prevState) => {
-        return {
-          homes: responseJson.data.homes,
-        }
-      });
-    });
-  }
-
-  handleSearchChange(event) {
-    console.log('cjasdkfj');
-    this.setState({searchValue: event.target.value})
-  };
-
-  handleSearchSubmit(event) {
-    //event.preventDefault();
-      fetch('https://homelistings.herokuapp.com/api/homes')
-    .then((response) => {
-      return response.json()
-    })
-    .then((responseJson) => {
-      responseJson.data.homes.map((elem)=>{
-        if (elem.city===this.state.searchValue) {
-          console.log(elem.address);
-          const newSearched = {
-            homes: elem,
-          }
-          console.log(elem);
-        }
+      .then((response) => {
+        return response.json()
       })
-      this.setState((prevState) => {
-        return {
-          newSearched: responseJson.data.homes.elem,
-        }
+      .then((responseJson) => {
+        // console.log(responseJson)
+        this.setState({
+          homes: responseJson.data.homes,
+        });
       });
-    }); 
   }
+  //   fetchAllHomes() {
+  //   fetch('https://homelistings.herokuapp.com/api/homes')
+  //   .then((response) => {
+  //     return response.json()
+  //   })
+  //   .then((responseJson) => {
+  //     console.log(responseJson)
+  //     this.setState((prevState) => {
+  //       return {
+  //         homes: responseJson.data.homes,
+  //       }
+  //     });
+  //   });
+  // }
+
+  
 
    handleHomesEdit(event) {
    event.preventDefault();
@@ -101,6 +84,8 @@ class HomeList extends Component {
   render() {
     return (
       <div>
+      sdfsdf
+      {console.log(this.state.homes)}
         <ul className="homeslist">{this.state.homes.map((elem) => {
           return (
             <Home

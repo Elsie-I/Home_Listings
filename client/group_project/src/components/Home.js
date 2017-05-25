@@ -9,7 +9,7 @@ import {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       isBeingEdited: false,
       inputAddressValue: this.props.homes.address,
       inputZipcodeValue: this.props.homes.zipcode,
@@ -19,131 +19,155 @@ class Home extends Component {
       inputAboutValue: this.props.homes.about,
       inputImgValue: this.props.homes.img_url,
     }
-      this.handleAddressChange=this.handleAddressChange.bind(this);
-      this.handleZipcodeChange=this.handleZipcodeChange.bind(this);
-      this.handleCityChange=this.handleCityChange.bind(this);
-      this.handleBedroomsChange=this.handleBedroomsChange.bind(this);
-      this.handlePriceChange=this.handlePriceChange.bind(this);
-      this.handleAboutChange=this.handleAboutChange.bind(this);
-      this.handleImgChange=this.handleImgChange.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handleZipcodeChange = this.handleZipcodeChange.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.handleBedroomsChange = this.handleBedroomsChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleAboutChange = this.handleAboutChange.bind(this);
+    this.handleImgChange = this.handleImgChange.bind(this);
   }
 
-    handleAddressChange(event) {
-      this.setState({inputAddressValue: event.target.value})
-    } 
-    handleZipcodeChange(event) {
-      this.setState({inputZipcodeValue: event.target.value})
-    }
-    handleCityChange(event) {
-      this.setState({inputCityValue: event.target.value})
-    }
-    handleBedroomsChange(event) {
-      this.setState({inputBedroomsValue: event.target.value})
-    } 
-    handlePriceChange(event) {
-      this.setState({inputPriceValue: event.target.value})
-    }  
-    handleAboutChange(event) {
-      this.setState({inputAboutValue: event.target.value})
-    }
-    handleImgChange(event) {
-      this.setState({inputImgValue: event.target.value})
-    }
+  handleAddressChange(event) {
+    this.setState({ inputAddressValue: event.target.value })
+  }
+  handleZipcodeChange(event) {
+    this.setState({ inputZipcodeValue: event.target.value })
+  }
+  handleCityChange(event) {
+    this.setState({ inputCityValue: event.target.value })
+  }
+  handleBedroomsChange(event) {
+    this.setState({ inputBedroomsValue: event.target.value })
+  }
+  handlePriceChange(event) {
+    this.setState({ inputPriceValue: event.target.value })
+  }
+  handleAboutChange(event) {
+    this.setState({ inputAboutValue: event.target.value })
+  }
+  handleImgChange(event) {
+    this.setState({ inputImgValue: event.target.value })
+  }
 
-    renderEditForm() {
-      return (
-        <form
-          className="editform"
-          onSubmit={(event)=>{
-            this.props.handleHomesEdit(event);
-            this.setState({isBeingEdited: false});
-          }}>
-                  <input
-                  type="text"
-                  value={this.state.inputAddressValue}
-                  name='address'
-                  placeholder='Address'
-                  onChange={this.handleAddressChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputZipcodeValue}
-                name='zipcode'
-                placeholder='ZipCode'
-                onChange={this.handleZipcodeChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputCityValue}
-                name='city'
-                placeholder='City'
-                onChange={this.handleCityChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputBedroomsValue}
-                name='bedrooms'
-                placeholder='Number of Bedrooms'
-                onChange={this.handleBedroomsChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputPriceValue}
-                name='price'
-                placeholder='Price'
-                onChange={this.handlePriceChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputAboutValue}
-                name='about'
-                placeholder='About'
-                onChange={this.handleAboutChange}
-              /><br/>
-              <input
-                type="text"
-                value={this.state.inputImgValue}
-                name='img_url'
-                placeholder='Image URl'
-                onChange={this.handleImgChange}
-              /><br/>
-              <input
-                style={{visibility:'hidden'}}
-                readOnly
-                name="id"
-                value={this.props.homes.id} />
-              <input type="submit" value="Edit Now!" />
-          </form>
-      )
-    }
-
-    
-  render() {
+  renderEditForm() {
     return (
-      <Router>
-        <div className="singleHome">
-          <li><img src={this.props.homes.img_url}/></li>
-          <li>About: {this.props.homes.about}</li>
-          <li>Address: {this.props.homes.address}</li>
-          <li>Zipcode: {this.props.homes.zipcode}</li>
-          <li>City: {this.props.homes.city}</li>
-          <li>Bedrooms: {this.props.homes.bedrooms}</li>
-          <li>Price: {this.props.homes.price}</li>
-          <Link to={`/propertieslist/${this.props.homes.id}`}></Link>
-            <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
-            Delete Home
+      <form
+        className="editform"
+        onSubmit={(event) => {
+          this.props.handleHomesEdit(event);
+          this.setState({ isBeingEdited: false });
+        }}>
+        <input
+          type="text"
+          value={this.state.inputAddressValue}
+          name='address'
+          placeholder='Address'
+          onChange={this.handleAddressChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputZipcodeValue}
+          name='zipcode'
+          placeholder='ZipCode'
+          onChange={this.handleZipcodeChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputCityValue}
+          name='city'
+          placeholder='City'
+          onChange={this.handleCityChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputBedroomsValue}
+          name='bedrooms'
+          placeholder='Number of Bedrooms'
+          onChange={this.handleBedroomsChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputPriceValue}
+          name='price'
+          placeholder='Price'
+          onChange={this.handlePriceChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputAboutValue}
+          name='about'
+          placeholder='About'
+          onChange={this.handleAboutChange}
+        /><br />
+        <input
+          type="text"
+          value={this.state.inputImgValue}
+          name='img_url'
+          placeholder='Image URl'
+          onChange={this.handleImgChange}
+        /><br />
+        <input
+          style={{ visibility: 'hidden' }}
+          readOnly
+          name="id"
+          value={this.props.homes.id} />
+        <input type="submit" value="Edit Now!" />
+      </form>
+    )
+  }
+
+  renderItems() {
+    if (this.state.isBeingEdited === false) {
+      console.log(this.renderInfo)
+      // debugger
+      return this.renderInfo();
+    } else {
+      console.log(this.renderEditForm)
+      // debugger
+      return this.renderEditForm();
+      
+    }
+  }
+
+
+  render() {
+    return(
+      <div>
+      {this.renderItems()}   
+      </div>
+    )
+  }
+  renderInfo() {
+return (
+    <Router>
+      <div className="singleHome">
+        <li><img src={this.props.homes.img_url} /></li>
+        <li>About: {this.props.homes.about}</li>
+        <li>Address: {this.props.homes.address}</li>
+        <li>Zipcode: {this.props.homes.zipcode}</li>
+        <li>City: {this.props.homes.city}</li>
+        <li>Bedrooms: {this.props.homes.bedrooms}</li>
+        <li>Price: {this.props.homes.price}</li>
+        <Link to={`/propertieslist/${this.props.homes.id}`}>See more</Link>
+        <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
+          Delete Home
             </button>
-          
-          
-          {/*
+        <button onClick={() => {
+          this.setState({ isBeingEdited: true })
+        }}>
+          Edit Listing</button>
+        {/*
             <li className="kajsdf"><Link to={`/propertieslist/${this.props.homes.id}`} >See More</Link></li>
         <Route exact path="/propertieslist/:id" component={FetchedSinglePage} />
           <DetailsSinglePage
               ids={this.props.homes.id}/>
           <Route exact path={`/propertieslist/:${this.state.homes.id}`} component={DetailsSinglePage} />*/}
-        </div>
-      </Router>
-    )
+      </div>
+    </Router>
+
+)
   }
+  
 }
 export default Home;
