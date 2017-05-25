@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HomeList from './components/HomeList';
 import Home from './components/Home';
 import Searchedcomp from './components/Searchedcomp';
+import HomeSingle from './components/HomeSingle';
 import OwnerList from './components/OwnerList';
 import './App.css';
 import {
@@ -29,7 +30,7 @@ class App extends Component {
 
             <Route exact path="/ownerpage" component={OwnerList} />
             <Route exact path="/propertieslist" component={HomeList} />
-            <Route exact path="/propertieslist/:id" component={Searchedcomp} />
+            <Route exact path="/propertieslist/:id" component={HomeSingle} />
             </main>
             {/*<HomeList
                 homes={this.state.homes}/>*/}

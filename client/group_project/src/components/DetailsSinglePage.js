@@ -8,7 +8,8 @@ class DetailsSinglePage extends Component {
 
 
   fetchSingleHome() {
-    fetch(`https://homelistings.herokuapp.com/api/homes/${this.props.ids}`)
+    console.log(`${this.props.id}`)
+    fetch(`https://homelistings.herokuapp.com/api/homes/${this.props.id}`)
     .then((response) => {
       return response.json()
     })
@@ -17,7 +18,7 @@ class DetailsSinglePage extends Component {
       
       this.setState((prevState) => {
         return {
-          homes: responseJson.ids,
+          homes: responseJson.id,
         }
       });
     });
@@ -25,7 +26,7 @@ class DetailsSinglePage extends Component {
   render() {
     return (
       <div>
-              <p>Property Id {this.props.ids}</p>
+          
       </div>
     )
   }

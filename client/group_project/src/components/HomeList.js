@@ -84,7 +84,6 @@ fetchAllHomes() {
   render() {
     return (
       <div>
-      sdfsdf
       {console.log(this.state.homes)}
         <ul className="homeslist">{this.state.homes.map((elem) => {
           return (
@@ -97,19 +96,7 @@ fetchAllHomes() {
           )
         })}
         </ul>
-        <form 
-              className="searchform"
-              onSubmit={this.handleSearchSubmit}
-                      >
-          <input type="text"
-                 value={this.searchValue}
-                 name='city'
-                 placeholder='Search City'
-                 onChange={this.handleSearchChange}
-                 />
-            <input type="submit" value="Search Now"/>
-            <li className="mainlinks"><Link to="/propertieslist?city=">Search stuff</Link></li>
-        </form>
+        
         {/*<Searchedcomp newSearched={this.state.newSearched}/>*/}
       </div>
       );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DetailsSinglePage from './DetailsSinglePage';
+import HomeSingle from './HomeSingle'
 import {
   BrowserRouter as Router,
   Route,
@@ -26,6 +27,7 @@ class Home extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleAboutChange = this.handleAboutChange.bind(this);
     this.handleImgChange = this.handleImgChange.bind(this);
+    this.renderInfo=this.renderInfo.bind(this);
   }
 
   handleAddressChange(event) {
@@ -141,29 +143,32 @@ class Home extends Component {
   renderInfo() {
 return (
     <Router>
-      <div className="singleHome">
-        <li><img src={this.props.homes.img_url} /></li>
-        <li>About: {this.props.homes.about}</li>
-        <li>Address: {this.props.homes.address}</li>
-        <li>Zipcode: {this.props.homes.zipcode}</li>
-        <li>City: {this.props.homes.city}</li>
-        <li>Bedrooms: {this.props.homes.bedrooms}</li>
-        <li>Price: {this.props.homes.price}</li>
-        <Link to={`/propertieslist/${this.props.homes.id}`}>See more</Link>
-        <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
-          Delete Home
-            </button>
-        <button onClick={() => {
-          this.setState({ isBeingEdited: true })
-        }}>
-          Edit Listing</button>
-        {/*
-            <li className="kajsdf"><Link to={`/propertieslist/${this.props.homes.id}`} >See More</Link></li>
-        <Route exact path="/propertieslist/:id" component={FetchedSinglePage} />
+        <div className="singleHome">
+          <li><img src={this.props.homes.img_url} /></li>
+          <li>About: {this.props.homes.about}</li>
+          <li>Address: {this.props.homes.address}</li>
+          <li>Zipcode: {this.props.homes.zipcode}</li>
+          <li>City: {this.props.homes.city}</li>
+          <li>Bedrooms: {this.props.homes.bedrooms}</li>
+          <li>Price: {this.props.homes.price}</li>
+          <Link to={`/propertieslist/${this.props.homes.id}`}>See more</Link>
+          <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
+            Delete Home
+              </button>
+          <button onClick={() => {
+            this.setState({ isBeingEdited: true })
+          }}>
+            Edit Listing</button>
+          {/*
+              <li className="kajsdf"><Link to={`/propertieslist/${this.props.homes.id}`} >See More</Link></li>
+          <Route exact path="/propertieslist/:id" component={FetchedSinglePage} />
           <DetailsSinglePage
-              ids={this.props.homes.id}/>
-          <Route exact path={`/propertieslist/:${this.state.homes.id}`} component={DetailsSinglePage} />*/}
-      </div>
+                id={this.props.homes.id}/>
+            */}
+            <Route path="/propertieslist/:id" component={HomeSingle} />
+          
+        </div>
+          
     </Router>
 
 )
