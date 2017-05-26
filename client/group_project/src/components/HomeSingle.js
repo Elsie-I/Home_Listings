@@ -29,9 +29,9 @@ class HomeSingle extends Component {
           homeDataReceived: true,
         })
       })
-    }
+  }
 
-  
+
   // componentWillUnmount() {
   //   this.fetchZomato()
   // }
@@ -74,14 +74,15 @@ class HomeSingle extends Component {
       );
     }
   }
-  zomatocheck () {
-    if (this.state.zomatoDataReceived) {
+  zomatocheck() {
+    if (this.state.homeDataReceived) {
       return (
-        <ZomatoComp 
-            zomatostuff={this.state.zomatodata}
-            propcity={this.state.home.data.home.city}
-            />
+        <ZomatoComp
+          zomatostuff={this.state.zomatodata}
+          propcity={this.state.home.data.home.city}
+        />
       )
+
     }
   }
   render() {
