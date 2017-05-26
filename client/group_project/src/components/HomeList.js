@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
-import Searchedcomp from './Searchedcomp';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+
 class HomeList extends Component {
     constructor(props){
     super(props);

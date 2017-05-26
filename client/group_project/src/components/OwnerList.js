@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import OwnerSingle from './OwnerSingle';
 import AddHomeForm from './AddHomeForm';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+
 class OwnerList extends Component {
     constructor(props){
     super(props);

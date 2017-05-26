@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DetailsSinglePage from './DetailsSinglePage';
 import HomeSingle from './HomeSingle'
 import {
   BrowserRouter as Router,
@@ -144,7 +143,7 @@ class Home extends Component {
 return (
     <Router>
         <div className="singleHome">
-          <li><img src={this.props.homes.img_url} /></li>
+          <li><img src={this.props.homes.img_url} alt=""/></li>
           <li>About: {this.props.homes.about}</li>
           <li>Address: {this.props.homes.address}</li>
           <li>Zipcode: {this.props.homes.zipcode}</li>
