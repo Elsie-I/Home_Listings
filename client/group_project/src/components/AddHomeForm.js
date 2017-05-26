@@ -56,7 +56,7 @@ class AddHomeForm extends Component {
           placeholder='Image URl'
           onChange={this.props.handleImgChange}
         /><br/>
-        <input type="submit" value="Add Quote!" />
+        <input type="submit" value="Add your Listing!" />
 
           </form>
       </div>

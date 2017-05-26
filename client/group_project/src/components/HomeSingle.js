@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ZomatoComp from './ZomatoComp';
 
 class HomeSingle extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class HomeSingle extends Component {
       zomatoDataReceived: false,
       zomatodata: null,
     }
- }
+  }
 
- componentDidMount() {
+  componentDidMount() {
     fetch(`https://homelistings.herokuapp.com/api/homes/${this.state.homeId}`)
       .then((data) => {
         return data.json();
@@ -29,54 +29,61 @@ class HomeSingle extends Component {
           homeDataReceived: true,
         })
       })
-      this.fetchZomato()
-  }
+    }
 
   fetchZomato() {
-     if (this.state.homeDataReceived===true) {
-      console.log(this.state.home.data.home.city, 'city city')
-      
-  fetch(`https://developers.zomato.com/api/v2.1/search?q=${this.state.home.data.home.city}`, {
-      method: 'post',
-      headers: {
-      "user-key": "1259e86a2176b246f97529b9c0ca6139",
-      "Accept": "application/json"    
-      }})
-    .then((response)=>{
-    return response.json();
-        }).then((zomatoData)=>{
-          console.log(zomatoData.restaurants)
-          debugger
-          this.setState({
-            zomatoDataReceived: true,
-            zomatodata: zomatoData.restaurants,
+
+      if (this.state.homeDataReceived === true) {
+      console.log('this is chekcing' + this.state.home.data.home.city);
+        console.log(this.state.home.data.home.city, 'city city')
+
+        fetch(`https://developers.zomato.com/api/v2.1/search?q=${this.state.home.data.home.city}`, {
+          method: 'post',
+          headers: {
+            "user-key": "1259e86a2176b246f97529b9c0ca6139",
+            "Accept": "application/json"
+          }
+        })
+          .then((response) => {
+            return response.json();
+          }).then((zomatoData) => {
+            // console.log(zomatoData.restaurants)
+            //debugger
+            this.setState({
+              zomatoDataReceived: true,
+              zomatodata: zomatoData.restaurants,
+              homeDataReceived: true,
+            })
           })
-    })
+      }
+    
+  };
+  componentWillUnmount() {
+    this.fetchZomato()
   }
-  }
 
-//  fetchZomato() {
-//     console.log(this.state.home, 'zomatoERWER')
-//       fetch(`https://developers.zomato.com/api/v2.1/search?q=elmhurst`, {
-//       method: 'post',
-//       headers: {
-//       "user-key": "1259e86a2176b246f97529b9c0ca6139",
-//       "Accept": "application/json"    
-//       }})
-//     .then((response)=>{
-//     return response.json();
-//         }).then((zomatoData)=>{
-//           console.log(zomatoData)
-//           this.setState({
-//             zomatoDataReceived: true,
-//             zomatodata: zomatoData,
-//           })
-//     })
-//  }
+  //  fetchZomato() {
+  //     console.log(this.state.home, 'zomatoERWER')
+  //       fetch(`https://developers.zomato.com/api/v2.1/search?q=elmhurst`, {
+  //       method: 'post',
+  //       headers: {
+  //       "user-key": "1259e86a2176b246f97529b9c0ca6139",
+  //       "Accept": "application/json"    
+  //       }})
+  //     .then((response)=>{
+  //     return response.json();
+  //         }).then((zomatoData)=>{
+  //           console.log(zomatoData)
+  //           this.setState({
+  //             zomatoDataReceived: true,
+  //             zomatodata: zomatoData,
+  //           })
+  //     })
+  //  }
 
 
- renderHome() {
-  //  console.log('this shit',this.state)
+  renderHome() {
+    //  console.log('this shit',this.state)
     if (this.state.homeDataReceived) {
       console.log(this.state.home.data.home.city, 'city city')
       // debugger
@@ -87,17 +94,22 @@ class HomeSingle extends Component {
           <p className="city">{this.state.home.data.home.city}</p>
           <p className="bedrooms">{this.state.home.data.home.bedrooms}</p>
           <p className="about">{this.state.home.data.home.about}</p>
-          <img src={this.state.home.data.home.img_url} className="singleImg" alt=""/>
-      </div>
+          <img src={this.state.home.data.home.img_url} className="singleImg" alt="" />
+          <p>heyheyhey</p>
+        </div>
       );
     }
   }
 
 
- render() {
+  render() {
     return (
       <div className="single-home">
         {this.renderHome()}
+        {this.fetchZomato()}
+        <ZomatoComp 
+            zomatostuff={this.state.zomatodata}
+            />
       </div>
     );
   };

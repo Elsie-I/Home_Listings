@@ -1,10 +1,7 @@
+
 .App {
   text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .App-header {
@@ -18,16 +15,58 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@media only screen and (max-width: 500px) {
+    body {
+        background-color: lightblue;
+        box-sizing: border-box;
+    }
+    .renterlink {
+      text-decoration: none;
+      font-size: 24px;
+      /*background: orange;*/
+      margin: 10px auto 10px;
+      /*width: 25%;*/
+      /*border-radius: 400px;*/
+      list-style-type: none;
+      float:left;
+    }
+    .ownerlink{
+     text-decoration: none;
+      font-size: 24px;
+      /*background: orange;*/
+      margin: 10px auto 10px;
+      /*width: 25%;*/
+      /*border-radius: 400px;*/
+      list-style-type: none;
+      float:right;
+    }
+
+    nav {
+          list-style-type: none;
+
+      /*display:flex;
+      flex-direction: row;*/
+      
+    }
+    nav ul button{
+      font-size: 24px;
+          list-style-type: none;
+
+      /*flex-direction: row;*/
+    }
+    nav ul li button{
+    list-style-type: none;
+    }
 }
+
+main{
+  clear:both;
+}
+
 .homeslist {
   list-style-type: none;
 }
-.mainlinks{
-list-style-type: none;
-}
+
 .homelist {
   margin:20px;
 }
@@ -37,4 +76,20 @@ list-style-type: none;
 .singleHome img {
   height: 300px;
   width: 300px;
+}
+.header span {
+  color: red;
+}
+.header {
+  text-align:center;
+}
+.logo {
+  background-image: url('./components/images/rentlogo.png');
+  height: 150px;
+  background-position: center;
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+nav ul li {
+  list-style-type: none;
 }
