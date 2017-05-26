@@ -2,7 +2,7 @@ import React, { Component } from 'react'; import Footer from './components/Foote
 import HomeList from './components/HomeList'; import SearchResult from './components/SearchResult'; import Home from './components/Home';
 import './App.css'; import { BrowserRouter as Router, Route, Link } from 'react-router-dom'; class App extends Component
 { render() { return (
-<Router>
+<Router> 
   <div className="App">
     <Header/>
     <nav className="navigation">

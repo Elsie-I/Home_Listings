@@ -32,7 +32,7 @@ homesController.show = (req, res) => {
 homesController.showSpecific = (req, res) => {
       console.log(req.params);
 
-  Home.findSpecific(req.params.zipcode, req.params.price)
+  Home.findSpecific(req.params.zipcode, req.params.city, req.params.pricemore, req.params.priceless, req.params.bedrooms)
     .then(home => {
       res.json({
         message: 'ok',

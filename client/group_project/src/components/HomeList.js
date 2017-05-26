@@ -84,11 +84,11 @@ class HomeList extends Component {
   }
  
   render() {
-    return (
+    return ( 
       <div>
         {this.redirectToSearch(this.state.results)}
 
-        <form
+        <form 
           className="searchform"
           onSubmit={this.handleSearchSubmit}
         >

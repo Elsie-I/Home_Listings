@@ -20,23 +20,24 @@ Home.findById = (id) => {
 
 
 
-Home.findSpecific = (zipcode, price) => {
+Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
 
-  if (price === 'NUL') {
-    console.log('thisi w first statement');
+  return db.any(
+    `
+    SELECT * FROM homes 
+    WHERE 
+    ($1 IS NULL OR zipcode = $1)
+    AND  
+    ($2 IS NULL OR city = $2)
+    AND  
+    ($3 IS NULL OR price > $3)
+    AND  
+    ($4 IS NULL OR price < $4)
+    AND  
+    ($5 IS NULL OR bedrooms = $5)
+    `, [zipcode, city, pricemore, priceless, bedrooms]
+  )
 
-    return db.any(`SELECT * FROM table WHERE zipcode = $1`, [zipcode])
-
-  } else if (zipcode === 'NUL') {
-    console.log('thisi second statement');
-
-    return db.any(`SELECT * FROM table WHERE price = $1`, [price])
-
-  } else {
-    console.log('thisi w last statement');
-
-    return db.any(`SELECT * FROM homes WHERE zipcode = $1 AND price < $2`, [zipcode, price])
-  }
 
 };
 
