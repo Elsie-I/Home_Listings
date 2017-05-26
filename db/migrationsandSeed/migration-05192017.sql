@@ -28,5 +28,8 @@ CREATE TABLE IF NOT EXISTS Homes (
 INSERT INTO homes (address, zipcode, city, bedrooms, price, about, img_url) VALUES 
   ('2345 coney island avenue', 11235, 'brooklyn', 2, 1500, 'this is good home', 'http://www.google.com/'),
   ('2778 beltparkway', 11228, 'queens', 3, 1100,'this is good home', 'http://www.google.com/'),
-  ('8925 bath avenue', 22131, 'brooklyn', 4, 1400,'this is good home', 'http://www.google.com/'),
-  ('9827 none avenue', 11298, 'manhattan', 5, 1200,'this is good home', 'http://www.google.com/');
+  ('8925 beltparkway avenue', 11298, 'brooklyn', 4, 1400,'this is good home', 'http://www.google.com/'),
+  ('2345 bath avenue', 22131, 'brooklyn', 4, 1100,'this is good home', 'http://www.google.com/'),
+  ('8925 bath avenue', 22131, 'queens', 4, 1400,'this is good home', 'http://www.google.com/'),
+  ('9827 none avenue', 11298, 'manhattan', 3, 1200,'this is good home', 'http://www.google.com/'),
+  ('9827 beltparkway avenue', 11298, 'manhattan', 5, 1200,'this is good home', 'http://www.google.com/');

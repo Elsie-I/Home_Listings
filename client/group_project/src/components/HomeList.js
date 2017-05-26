@@ -75,7 +75,6 @@ class HomeList extends Component {
     })
   }
 
-
   redirectToSearch(value) {
     if (this.state.submitForm) {
       return <Redirect to={{

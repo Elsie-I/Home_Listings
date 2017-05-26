@@ -22,16 +22,17 @@ homesController.show = (req, res) => {
       res.json({
         message: 'ok',
         data: { home },
-      });
+      }); 
     })
     .catch(err => {
       res.status(400).json({ message: '400', err });
     });
 };
-homesController.showSpecific = (req, res) => {
-      console.log(req);
 
-  Home.findSpecific(req.params.zipcode, req.params.zipcode)
+homesController.showSpecific = (req, res) => {
+      console.log(req.params);
+
+  Home.findSpecific(req.params.zipcode, req.params.price)
     .then(home => {
       res.json({
         message: 'ok',
@@ -41,7 +42,7 @@ homesController.showSpecific = (req, res) => {
     .catch(err => {
       res.status(400).json({ message: '400', err });
     });
-};
+}; 
 
 
 homesController.create = (req, res) => {

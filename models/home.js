@@ -9,7 +9,7 @@ Home.findAll = () => {
 };
 
 Home.findById = (id) => {
-  
+
   return db.oneOrNone(
     `
     SELECT * FROM homes
@@ -17,19 +17,27 @@ Home.findById = (id) => {
     [id]
   );
 };
- 
+
 
 
 Home.findSpecific = (zipcode, price) => {
-  
-  return db.query(
-    `
-    SELECT * FROM homes
-    WHERE zipcode = $1
-    AND price < $2
-    `,
-    [zipcode, price]
-  );
+
+  if (price === 'NUL') {
+    console.log('thisi w first statement');
+
+    return db.any(`SELECT * FROM table WHERE zipcode = $1`, [zipcode])
+
+  } else if (zipcode === 'NUL') {
+    console.log('thisi second statement');
+
+    return db.any(`SELECT * FROM table WHERE price = $1`, [price])
+
+  } else {
+    console.log('thisi w last statement');
+
+    return db.any(`SELECT * FROM homes WHERE zipcode = $1 AND price < $2`, [zipcode, price])
+  }
+
 };
 
 
