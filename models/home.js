@@ -21,7 +21,29 @@ Home.findById = (id) => {
 
 
 Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
+  console.log('this is zipcode => ', zipcode);
 
+  let newzipcode = zipcode;
+  if (zipcode === "NULL") {
+    newzipcode = null;
+  }
+  let newcity = city;
+  if (city === "NULL") {
+    newcity = null;
+  }
+  let newpricemore = pricemore;
+  if (pricemore === "NULL") {
+    newpricemore = null;
+  }
+  let newpriceless = priceless;
+  if (priceless === "NULL") {
+    newpriceless = null;
+  }
+  let newbedrooms = bedrooms;
+  if (bedrooms === "NULL") {
+    newbedrooms = null;
+  }
+  zipcode = Number(zipcode);
   return db.any(
     `
     SELECT * FROM homes 
@@ -34,8 +56,8 @@ Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
     AND  
     ($4 IS NULL OR price < $4)
     AND  
-    ($5 IS NULL OR bedrooms = $5)
-    `, [zipcode, city, pricemore, priceless, bedrooms]
+    ($5::int IS NULL OR bedrooms = $5::int)
+    `, [newzipcode, newcity, newpricemore, newpriceless, newbedrooms]
   )
 
 

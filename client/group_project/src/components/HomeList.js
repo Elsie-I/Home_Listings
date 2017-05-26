@@ -11,15 +11,17 @@ class HomeList extends Component {
       homes: [],
       results: '',
       submitForm: false,
-      zipCodeValue: 'none',
-      cityValue: 'none',
-      priceMoreThan: 'none',
-      priceLessThan: 'none',
+      zipCodeValue: 'NULL',
+      cityValue: 'NULL',
+      priceMoreThan: 'NULL',
+      priceLessThan: 'NULL',
+      bedrooms: 'NULL',
     })
     this.handleZipCodeValueChange = this.handleZipCodeValueChange.bind(this);
     this.handleCityValueChange = this.handleCityValueChange.bind(this);
     this.handlePriceLessThanValueChange = this.handlePriceLessThanValueChange.bind(this);
     this.handlePriceMoreThanValueChange = this.handlePriceMoreThanValueChange.bind(this);
+    this.handleBedroomsValueChange = this.handleBedroomsValueChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
   componentDidMount() {
@@ -41,7 +43,7 @@ class HomeList extends Component {
 
   handleZipCodeValueChange(event) {
     if (event.target.value.replace(/\s/g, '') === '') {
-      this.setState({ zipCodeValue: 'none' })
+      this.setState({ zipCodeValue: 'NULL' })
     } else {
       this.setState({ zipCodeValue: event.target.value.replace(/\s/g, '') });
     }
@@ -53,7 +55,7 @@ class HomeList extends Component {
 
   handlePriceMoreThanValueChange(event) {
     if (event.target.value.replace(/\s/g, '') === '') {
-      this.setState({ priceMoreThan: 'none' })
+      this.setState({ priceMoreThan: 'NULL' })
     } else {
       this.setState({ priceMoreThan: event.target.value.replace(/\s/g, '') });
     }
@@ -61,18 +63,36 @@ class HomeList extends Component {
 
   handlePriceLessThanValueChange(event) {
     if (event.target.value.replace(/\s/g, '') === '') {
-      this.setState({ priceLessThan: 'none' })
+      this.setState({ priceLessThan: 'NULL' })
     } else {
       this.setState({ priceLessThan: event.target.value.replace(/\s/g, '') });
+    }
+  };
+  handleBedroomsValueChange(event) {
+    if (event.target.value.replace(/\s/g, '') === '') {
+      this.setState({ bedrooms: 'NULL' })
+    } else {
+      this.setState({ bedrooms: event.target.value.replace(/\s/g, '') });
     }
   };
 
 
   handleSearchSubmit(event) {
     event.preventDefault();
-    this.setState({
-      submitForm: true,
-    })
+    // this.setState({
+    //   submitForm: true,
+    // })
+
+    fetch(`http://homelistings.herokuapp.com/api/homes/results/zipcode=${this.state.zipCodeValue}&city=${this.state.cityValue}&pricemore=${this.state.priceMoreThan}&priceless=${this.state.priceLessThan}&bedrooms=${this.state.bedrooms}`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJson) => {
+        console.log(responseJson)
+        
+      });
+
+
   }
 
   redirectToSearch(value) {
@@ -82,18 +102,18 @@ class HomeList extends Component {
       }} />
     }
   }
- 
+
   render() {
-    return ( 
+    return (
       <div>
         {this.redirectToSearch(this.state.results)}
 
-        <form 
+        <form
           className="searchform"
           onSubmit={this.handleSearchSubmit}
         >
           <select name="cityValue" onChange={this.handleCityValueChange} >
-            <option value="none">-- City --</option>
+            <option value="NULL">-- City --</option>
             <option value="queens">Queens</option>
             <option value="manhattan">Manhattan</option>
             <option value="brooklyn">Brooklyn</option>
@@ -123,6 +143,16 @@ class HomeList extends Component {
             name='priceLessThan'
             placeholder=''
             onChange={this.handlePriceLessThanValueChange}
+          />
+
+          <br/>
+          <br/>
+          Bedrooms:
+          <input type="text"
+            value={this.searchValue}
+            name='bedrooms'
+            placeholder=''
+            onChange={this.handleBedroomsValueChange}
           />
 
           <input type="submit" value="Search Now" />
