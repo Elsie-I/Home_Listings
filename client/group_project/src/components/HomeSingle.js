@@ -31,36 +31,10 @@ class HomeSingle extends Component {
       })
     }
 
-  fetchZomato() {
-
-      if (this.state.homeDataReceived === true) {
-      console.log('this is chekcing' + this.state.home.data.home.city);
-        console.log(this.state.home.data.home.city, 'city city')
-
-        fetch(`https://developers.zomato.com/api/v2.1/search?q=${this.state.home.data.home.city}`, {
-          method: 'post',
-          headers: {
-            "user-key": "1259e86a2176b246f97529b9c0ca6139",
-            "Accept": "application/json"
-          }
-        })
-          .then((response) => {
-            return response.json();
-          }).then((zomatoData) => {
-            // console.log(zomatoData.restaurants)
-            //debugger
-            this.setState({
-              zomatoDataReceived: true,
-              zomatodata: zomatoData.restaurants,
-              homeDataReceived: true,
-            })
-          })
-      }
-    
-  };
-  componentWillUnmount() {
-    this.fetchZomato()
-  }
+  
+  // componentWillUnmount() {
+  //   this.fetchZomato()
+  // }
 
   //  fetchZomato() {
   //     console.log(this.state.home, 'zomatoERWER')
@@ -100,16 +74,21 @@ class HomeSingle extends Component {
       );
     }
   }
-
-
+  zomatocheck () {
+    if (this.state.zomatoDataReceived) {
+      return (
+        <ZomatoComp 
+            zomatostuff={this.state.zomatodata}
+            propcity={this.state.home.data.home.city}
+            />
+      )
+    }
+  }
   render() {
     return (
       <div className="single-home">
         {this.renderHome()}
-        {this.fetchZomato()}
-        <ZomatoComp 
-            zomatostuff={this.state.zomatodata}
-            />
+        {this.zomatocheck()}
       </div>
     );
   };
