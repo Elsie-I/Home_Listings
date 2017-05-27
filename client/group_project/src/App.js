@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeList from './components/HomeList';
+import HomeSingle from './components/HomeSingle';
 import OwnerList from './components/OwnerList';
 import './App.css';
 import {
