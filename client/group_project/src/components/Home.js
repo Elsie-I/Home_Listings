@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import HomeSingle from './HomeSingle'
 import {
   BrowserRouter as Router,
-  Route,
   Link
 } from 'react-router-dom';
+
+import { Route, Redirect } from 'react-router'
+
 
 class Home extends Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class Home extends Component {
       inputPriceValue: this.props.homes.price,
       inputAboutValue: this.props.homes.about,
       inputImgValue: this.props.homes.img_url,
+      seeMore: false,
     }
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handleZipcodeChange = this.handleZipcodeChange.bind(this);
@@ -27,6 +30,7 @@ class Home extends Component {
     this.handleAboutChange = this.handleAboutChange.bind(this);
     this.handleImgChange = this.handleImgChange.bind(this);
     this.renderInfo = this.renderInfo.bind(this);
+    this.redirectToSingle = this.redirectToSingle.bind(this);
   }
 
   handleAddressChange(event) {
@@ -120,7 +124,6 @@ class Home extends Component {
 
   renderItems() {
     if (this.state.isBeingEdited === false) {
-      console.log(this.renderInfo)
       return this.renderInfo();
     } else {
       return this.renderEditForm();
@@ -131,10 +134,25 @@ class Home extends Component {
     return (
       <div>
         {this.renderItems()}
+        {this.redirectToSingle()}
       </div>
     )
   }
-  
+
+  redirectToSingle() {   
+    if (this.state.seeMore) {
+      console.log('workign haaa', this.props.homes.id);
+      return (
+        <Redirect to={{
+          pathname: `/propertieslist/${this.props.homes.id}`,
+        }} />
+      )
+
+    }
+
+
+  }
+
   renderInfo() {
     return (
       <Router>
@@ -146,7 +164,9 @@ class Home extends Component {
           <li>City: {this.props.homes.city}</li>
           <li>Bedrooms: {this.props.homes.bedrooms}</li>
           <li>Price: {this.props.homes.price}</li>
-          <Link to={`/propertieslist/${this.props.homes.id}`}>See more</Link>
+          <button onClick={() => {
+            this.setState({ seeMore: true, })
+          }} >See More</button>
           <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
             Delete Home
               </button>
@@ -156,6 +176,7 @@ class Home extends Component {
             Edit Listing</button>
           <Route path="/propertieslist/:id" component={HomeSingle} />
         </div>
+
       </Router>
     )
   }

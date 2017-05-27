@@ -151,7 +151,6 @@ class HomeList extends Component {
     }
     else {
       if (this.state.searchFetchData.length > 0) {
-        console.log("this is console logging=>", this.state.searchFetchData)
         return (
           <ul className="homeslist">{this.state.searchFetchData.map((elem) => {
             return (
