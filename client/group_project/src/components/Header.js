@@ -5,7 +5,8 @@ class Header extends Component {
     return (
       <header>
       <div className = 'header'>
-      <h1>I &#9829; NYC</h1>
+      <h1>I <span>&#9829;</span> NYC</h1>
+      <div className="logo"></div>
       </div>
       </header>
     )

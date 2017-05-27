@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import NotFound from './NotFound';
-
 import { Route, Redirect } from 'react-router'
 
 class HomeList extends Component {
@@ -24,6 +23,8 @@ class HomeList extends Component {
     this.handlePriceMoreThanValueChange = this.handlePriceMoreThanValueChange.bind(this);
     this.handleBedroomsValueChange = this.handleBedroomsValueChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleDeleteHome = this.handleDeleteHome.bind(this);
+    this.handleHomesEdit = this.handleHomesEdit.bind(this);
   }
   componentDidMount() {
     this.fetchAllHomes()
@@ -35,12 +36,12 @@ class HomeList extends Component {
         return response.json()
       })
       .then((responseJson) => {
-        console.log("this is the data of the first resposne=>", responseJson)
         this.setState({
           homes: responseJson.data.homes,
         });
       });
   }
+
 
   handleZipCodeValueChange(event) {
     if (event.target.value.replace(/\s/g, '') === '') {
@@ -77,7 +78,6 @@ class HomeList extends Component {
     }
   };
 
-
   handleSearchSubmit(event) {
     event.preventDefault();
     fetch(`http://homelistings.herokuapp.com/api/homes/results/zipcode=${this.state.zipCodeValue}&city=${this.state.cityValue}&pricemore=${this.state.priceMoreThan}&priceless=${this.state.priceLessThan}&bedrooms=${this.state.bedrooms}`)
@@ -90,9 +90,8 @@ class HomeList extends Component {
           submitForm: true,
         })
       });
-
-
   }
+
 
   redirectToSearch(value) {
     // if (this.state.submitForm) {
@@ -102,8 +101,42 @@ class HomeList extends Component {
     // }
   }
 
-  renderToPage() {
+  handleHomesEdit(event) {
+    event.preventDefault();
+    fetch(`https://homelistings.herokuapp.com/api/homes/${event.target.id.value}`, {
+      method: 'PUT',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        address: event.target.address.value,
+        zipcode: event.target.zipcode.value,
+        city: event.target.city.value,
+        bedrooms: event.target.bedrooms.value,
+        price: event.target.price.value,
+        about: event.target.about.value,
+        img_url: event.target.img_url.value,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          this.fetchAllHomes();
+        }
+      })
+  }
 
+  handleDeleteHome(id) {
+    fetch(`https://homelistings.herokuapp.com/api/homes/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          this.fetchAllHomes();
+        }
+      })
+  }
+
+
+
+  renderToPage() {
     if (this.state.submitForm == false) {
       return (
         <ul className="homeslist">{this.state.homes.map((elem) => {
@@ -111,6 +144,8 @@ class HomeList extends Component {
             <Home
               key={elem.id}
               homes={elem}
+              handleDeleteHome={this.handleDeleteHome}
+              handleHomesEdit={this.handleHomesEdit}
             />
           )
         })}
@@ -139,10 +174,10 @@ class HomeList extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
-
         <form
           className="searchform"
           onSubmit={this.handleSearchSubmit}
@@ -198,4 +233,5 @@ class HomeList extends Component {
     );
   }
 }
+
 export default HomeList;
