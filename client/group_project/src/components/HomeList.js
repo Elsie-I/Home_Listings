@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
-import SearchResult from './SearchResult';
+import NotFound from './NotFound';
 
 import { Route, Redirect } from 'react-router'
 
@@ -16,6 +16,7 @@ class HomeList extends Component {
       priceMoreThan: 'NULL',
       priceLessThan: 'NULL',
       bedrooms: 'NULL',
+      searchFetchData: [],
     })
     this.handleZipCodeValueChange = this.handleZipCodeValueChange.bind(this);
     this.handleCityValueChange = this.handleCityValueChange.bind(this);
@@ -34,7 +35,7 @@ class HomeList extends Component {
         return response.json()
       })
       .then((responseJson) => {
-        // console.log(responseJson)
+        console.log("this is the data of the first resposne=>", responseJson)
         this.setState({
           homes: responseJson.data.homes,
         });
@@ -79,34 +80,68 @@ class HomeList extends Component {
 
   handleSearchSubmit(event) {
     event.preventDefault();
-    // this.setState({
-    //   submitForm: true,
-    // })
-
     fetch(`http://homelistings.herokuapp.com/api/homes/results/zipcode=${this.state.zipCodeValue}&city=${this.state.cityValue}&pricemore=${this.state.priceMoreThan}&priceless=${this.state.priceLessThan}&bedrooms=${this.state.bedrooms}`)
       .then((response) => {
         return response.json()
       })
       .then((responseJson) => {
-        console.log(responseJson)
-        
+        this.setState({
+          searchFetchData: responseJson.data.home,
+          submitForm: true,
+        })
       });
 
 
   }
 
   redirectToSearch(value) {
-    if (this.state.submitForm) {
-      return <Redirect to={{
-        pathname: `/propertieslist/search/zipcode=${this.state.zipCodeValue}&city=${this.state.cityValue}&price=${this.state.priceMoreThan}and${this.state.priceLessThan}&end`,
-      }} />
+    // if (this.state.submitForm) {
+    //   return <Redirect to={{
+    //     pathname: `/propertieslist/search/zipcode=${this.state.zipCodeValue}&city=${this.state.cityValue}&price=${this.state.priceMoreThan}and${this.state.priceLessThan}&end`,
+    //   }} />
+    // }
+  }
+
+  renderToPage() {
+
+    if (this.state.submitForm == false) {
+      return (
+        <ul className="homeslist">{this.state.homes.map((elem) => {
+          return (
+            <Home
+              key={elem.id}
+              homes={elem}
+            />
+          )
+        })}
+        </ul>
+      )
+    }
+    else {
+      if (this.state.searchFetchData.length > 0) {
+        console.log("this is console logging=>", this.state.searchFetchData)
+        return (
+          <ul className="homeslist">{this.state.searchFetchData.map((elem) => {
+            return (
+              <Home
+                key={elem.id}
+                homes={elem}
+              />
+            )
+          })}
+          </ul>
+        )
+      } else {
+        return (
+          <NotFound />
+        )
+      }
     }
   }
 
   render() {
     return (
       <div>
-        {this.redirectToSearch(this.state.results)}
 
         <form
           className="searchform"
@@ -145,8 +180,8 @@ class HomeList extends Component {
             onChange={this.handlePriceLessThanValueChange}
           />
 
-          <br/>
-          <br/>
+          <br />
+          <br />
           Bedrooms:
           <input type="text"
             value={this.searchValue}
@@ -158,16 +193,7 @@ class HomeList extends Component {
           <input type="submit" value="Search Now" />
         </form>
 
-
-        <ul className="homeslist">{this.state.homes.map((elem) => {
-          return (
-            <Home
-              key={elem.id}
-              homes={elem}
-            />
-          )
-        })}
-        </ul>
+        {this.renderToPage()}
       </div>
     );
   }
