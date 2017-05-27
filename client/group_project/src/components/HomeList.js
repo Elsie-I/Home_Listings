@@ -133,8 +133,6 @@ class HomeList extends Component {
       })
   }
 
-
-
   renderToPage() {
     if (this.state.submitForm == false) {
       return (
@@ -172,7 +170,6 @@ class HomeList extends Component {
       }
     }
   }
-
 
   render() {
     return (
