@@ -40,7 +40,7 @@ class ZomatoComp extends Component {
           <ul className="restaurantlist">{this.state.zomatodata.map((elem, index)=>{
             return ( 
               <div className="eachrestaurant"> 
-                <li>{elem.restaurant.name}</li>
+                <li className="restaurantname">{elem.restaurant.name}</li>
                 <li>Cuisine Type: {elem.restaurant.cuisines}</li>
                 <li>{elem.restaurant.location.address}</li>
                 <img src={elem.restaurant.featured_image} height="150" width="150"/>

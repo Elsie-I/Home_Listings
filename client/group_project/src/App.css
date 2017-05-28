@@ -100,3 +100,7 @@ nav ul li {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.restaurantname {
+  font-style:italic;
+  font-size:22px;
+}
