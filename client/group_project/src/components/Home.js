@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import HomeSingle from './HomeSingle'
 import {
   BrowserRouter as Router,
-  Link
 } from 'react-router-dom';
 
 import { Route, Redirect } from 'react-router'
-
 
 class Home extends Component {
   constructor(props) {
