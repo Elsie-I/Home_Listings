@@ -25,7 +25,8 @@ class ZomatoComp extends Component {
           zomatodata: zomatoData.restaurants,
           zomatoDataReceived: true,
         })
-        console.log("this iw working =>", zomatoData)
+        console.log(zomatoData)
+        //console.log("this iw working =>", zomatoData.restaurants[3].restaurant.name)
       })
   };
 
@@ -33,7 +34,21 @@ class ZomatoComp extends Component {
   dudley() {
     if (this.state.zomatoDataReceived) {
       return (
-        <p>it has loaded</p>
+        <div>
+          {/*<p>it has loaded</p>*/}
+          <h3>Here are some popular restaurants and bars nearby</h3>
+          <ul className="restaurantlist">{this.state.zomatodata.map((elem, index)=>{
+            return ( 
+              <div className="eachrestaurant"> 
+                <li className="restaurantname">{elem.restaurant.name}</li>
+                <li>Cuisine Type: {elem.restaurant.cuisines}</li>
+                <li>{elem.restaurant.location.address}</li>
+                <img src={elem.restaurant.featured_image} height="150" width="150"/>
+                <li>Average Rating: {elem.restaurant.user_rating.aggregate_rating}</li>      
+              </div>
+            )}
+          )}</ul>
+        </div>
       )
     } else {
       return (

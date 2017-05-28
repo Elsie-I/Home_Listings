@@ -69,8 +69,7 @@ class HomeSingle extends Component {
           <p className="city">{this.state.home.data.home.city}</p>
           <p className="bedrooms">{this.state.home.data.home.bedrooms}</p>
           <p className="about">{this.state.home.data.home.about}</p>
-          <img src={this.state.home.data.home.img_url} className="singleImg" alt="" />
-          <p>heyheyhey</p>
+          <img src={this.state.home.data.home.img_url} className="singleImg" alt="" height="300" width="300"/>
         </div>
       );
     }
