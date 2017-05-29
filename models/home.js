@@ -9,20 +9,15 @@ Home.findAll = () => {
 };
 
 Home.findById = (id) => {
-
   return db.oneOrNone(
     `
     SELECT * FROM homes
-    WHERE id = $1`,
-    [id]
+    WHERE id = $1
+    `, [id]
   );
 };
 
-
-
 Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
-  console.log('this is zipcode => ', zipcode);
-
   let newzipcode = zipcode;
   if (zipcode === "NULL") {
     newzipcode = null;
@@ -30,14 +25,6 @@ Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
   let newcity = city;
   if (city === "NULL") {
     newcity = null;
-  }
-  let newpricemore = pricemore;
-  if (pricemore === "NULL") {
-    newpricemore = null;
-  }
-  let newpriceless = priceless;
-  if (priceless === "NULL") {
-    newpriceless = null;
   }
   let newbedrooms = bedrooms;
   if (bedrooms === "NULL") {
@@ -59,10 +46,7 @@ Home.findSpecific = (zipcode, city, pricemore, priceless, bedrooms) => {
     ($5::int IS NULL OR bedrooms = $5::int)
     `, [newzipcode, newcity, newpricemore, newpriceless, newbedrooms]
   )
-
-
 };
-
 
 Home.create = (home) => {
   return db.one(
