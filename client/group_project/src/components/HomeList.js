@@ -25,7 +25,7 @@ const handle = (props) => {
   );
 };
 
-const wrapperStyle = { width: 300, margin: 50 };
+const wrapperStyle = { width: 300, margin: 50, };
 
 class HomeList extends Component {
   constructor(props) {

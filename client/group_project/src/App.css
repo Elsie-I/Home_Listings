@@ -72,6 +72,7 @@ main{
 }
 .singleHome {
   margin:30px;
+  background:#FFC5B0;
 }
 .singleHome img {
   height: 300px;
@@ -99,8 +100,16 @@ nav ul li {
 .eachrestaurant {
   margin-top: 20px;
   margin-bottom: 20px;
+  background: #14E8B3;
 }
 .restaurantname {
   font-style:italic;
   font-size:22px;
 }
+.addhomediv input {
+  margin: 3px;
+  font-size: 20px;
+  text-align: center;
+}
+
+
