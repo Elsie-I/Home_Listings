@@ -137,7 +137,7 @@ class Home extends Component {
     )
   }
 
-  redirectToSingle() {   
+  redirectToSingle() {
     if (this.state.seeMore) {
       console.log('workign haaa', this.props.homes.id);
       return (
@@ -162,16 +162,18 @@ class Home extends Component {
           <li>City: {this.props.homes.city}</li>
           <li>Bedrooms: {this.props.homes.bedrooms}</li>
           <li>Price: {this.props.homes.price}</li>
-          <button onClick={() => {
-            this.setState({ seeMore: true, })
-          }} >See More</button>
-          <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
-            Delete Home
+          <li className="buttonList">
+            <button onClick={() => {
+              this.setState({ seeMore: true, })
+            }} >See More</button>
+            <button onClick={() => { this.props.handleDeleteHome(this.props.homes.id) }}>
+              Delete Home
               </button>
-          <button onClick={() => {
-            this.setState({ isBeingEdited: true })
-          }}>
-            Edit Listing</button>
+            <button onClick={() => {
+              this.setState({ isBeingEdited: true })
+            }}>
+              Edit Listing</button>
+          </li>
           <Route path="/propertieslist/:id" component={HomeSingle} />
         </div>
 

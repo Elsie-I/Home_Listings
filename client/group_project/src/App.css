@@ -20,7 +20,7 @@
     body {
         box-sizing: border-box;
         background-color: #D5EAFF;
-
+        margin-right: -10px;
 
     }
     .renterlink {
@@ -73,9 +73,12 @@ main{
 .homelist {
   margin:20px;
 }
+
+
 .singleHome {
   margin:30px;
   background:#FFC5B0;
+  border: 2px solid black;
 }
 .singleHome img {
   height: 300px;
@@ -103,8 +106,15 @@ nav ul li {
 .eachrestaurant {
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #14E8B3;
+  background: #f5f5dc;
+  margin-left: -39px;
 }
+
+
+.buttonList button {
+  font-size: 16px;
+}
+
 .restaurantname {
   font-style:italic;
   font-size:22px;
@@ -121,5 +131,7 @@ input {
   height: 30px;
   text-align: center;
 }
+
+
 
 

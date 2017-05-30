@@ -57,13 +57,10 @@ class HomeSingle extends Component {
 
 
   renderHome() {
-    //  console.log('this shit',this.state)
     if (this.state.homeDataReceived) {
       console.log(this.state.home.data.home.city, 'city city')
-      // debugger
       return (
         <div className="my-home">
-        <p>this is working and checking</p>
           <p className="address">{this.state.home.data.home.address}</p>
           <p className="zipcode">{this.state.home.data.home.zipcode}</p>
           <p className="city">{this.state.home.data.home.city}</p>
