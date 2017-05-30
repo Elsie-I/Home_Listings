@@ -57,7 +57,6 @@ class AddHomeForm extends Component {
           onChange={this.props.handleImgChange}
         /><br/>
         <input type="submit" value="Add your Listing!" />
-
           </form>
       </div>
     )

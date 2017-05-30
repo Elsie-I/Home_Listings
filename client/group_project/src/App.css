@@ -1,6 +1,7 @@
 
 .App {
   text-align: center;
+  text-transform: uppercase;
 
 }
 
@@ -17,8 +18,10 @@
 
 @media only screen and (max-width: 500px) {
     body {
-        background-color: lightblue;
         box-sizing: border-box;
+        background-color: #D5EAFF;
+
+
     }
     .renterlink {
       text-decoration: none;
@@ -104,3 +107,18 @@ nav ul li {
   font-style:italic;
   font-size:22px;
 }
+
+
+footer span {
+  color: red;
+}
+
+input {
+  width: 420px;
+  display: block;
+  border: 1px solid #999;
+  height: 30px;
+  text-align: center;
+}
+
+
